@@ -1,0 +1,72 @@
+#%RAML 1.0
+title: Transaction Log API
+version: v1
+baseUri: /api
+
+types:
+
+  LogRequest:
+    type: object
+    properties:
+      appName: string
+      correlationId: string
+      environment: string
+      uniqueKeyObject: string
+      uniqueKeyValue: string
+      statusCode: string
+      integrationName: string
+      status: string
+      source: string
+      target: string
+      timestamp: datetime
+      errorDescription: string
+      exceptionMessage: string
+      integrationMessage: string
+
+  LogResponse:
+    type: object
+    properties:
+      status: string
+      message: string
+      transactionLogId: string
+      correlationId: string
+      salesforceId: string
+
+/logs:
+  post:
+    description: Create transaction log in Salesforce
+    body:
+      application/json:
+        type: LogRequest
+
+    responses:
+      201:
+        body:
+          application/json:
+            type: LogResponse
+            example:
+              {
+                "status": "Success",
+                "message": "Error log created successfully in Salesforce",
+                "transactionLogId": "a4Udt0000017b5VEAQ",
+                "correlationId": "51735a10-39a4-11f1-b953-f6a6543daeed",
+                "salesforceId": "a4Udt0000017b5VEAQ"
+              }
+
+      400:
+        body:
+          application/json:
+            example:
+              {
+                "status": "Failed",
+                "message": "Bad Request"
+              }
+
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "status": "Failed",
+                "message": "Internal Server Error"
+              }

@@ -16,6 +16,17 @@
 		<app.runtime>4.9.0</app.runtime>
 		<mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
 	</properties>
+	<repositories>
+  <repository>
+    <id>mulesoft-releases</id>
+    <url>https://repository.mulesoft.org/releases/</url>
+  </repository>
+
+  <repository>
+    <id>central</id>
+    <url>https://repo.maven.apache.org/maven2</url>
+  </repository>
+</repositories>
 
 	<build>
 		<plugins>

@@ -16,9 +16,10 @@ jobs:
         with:
           distribution: temurin
           java-version: 8
+          cache: maven
 
       - name: Build and Deploy
         run: mvn clean deploy -DmuleDeploy
         env:
-          ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
-          ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
+          ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
+          ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}

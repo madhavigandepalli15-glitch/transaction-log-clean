@@ -11,7 +11,8 @@
     <packaging>mule-application</packaging>
 
     <name>transaction_log</name>
- <properties>
+
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -28,36 +29,38 @@
                 <version>3.2.0</version>
             </plugin>
 
-           <plugin>
-    <groupId>org.mule.tools.maven</groupId>
-    <artifactId>mule-maven-plugin</artifactId>
-    <version>${mule.maven.plugin.version}</version>
-    <extensions>true</extensions>
+            <plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-maven-plugin</artifactId>
+                <version>${mule.maven.plugin.version}</version>
+                <extensions>true</extensions>
 
-    <configuration>
+                <configuration>
 
-        <cloudhub2Deployment>
+                    <cloudhub2Deployment>
 
-            <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
+                        <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
 
-            <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
+                        <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
 
-            <connectedAppGrantType>client_credentials</connectedAppGrantType>
+                        <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-            <applicationName>transaction-log-clean-madhavi</applicationName>
+                        <applicationName>transaction-log-clean-madhavi</applicationName>
 
-            <environment>Sandbox</environment>
+                        <environment>Sandbox</environment>
 
-            <target>Cloudhub-US-East-1</target>
+                        <target>Shared Space</target>
 
-            <replicas>1</replicas>
+                        <replicas>1</replicas>
 
-            <vCores>0.1</vCores>
+                        <vCores>0.1</vCores>
 
-        </cloudhub2Deployment>
+                    </cloudhub2Deployment>
 
-    </configuration>
-</plugin>
+                </configuration>
+
+            </plugin>
+
         </plugins>
     </build>
 
@@ -76,7 +79,8 @@
             <version>1.2.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-             <dependency>
+
+        <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-apikit-module</artifactId>
             <version>1.11.3</version>
@@ -91,7 +95,8 @@
         </dependency>
 
     </dependencies>
- <repositories>
+
+    <repositories>
 
         <repository>
             <id>anypoint-exchange-v3</id>
@@ -102,20 +107,25 @@
         <repository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
-            <url>https://repository.mulesoft.org/releases/</url> </repository>
+            <url>https://repository.mulesoft.org/releases/</url>
+        </repository>
 
         <repository>
             <id>central</id>
             <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2</url> </repository>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
 
     </repositories>
- <pluginRepositories>
+
+    <pluginRepositories>
 
         <pluginRepository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
- </pluginRepositories>
+
+    </pluginRepositories>
+
 </project>

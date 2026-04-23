@@ -50,6 +50,7 @@
                         <environment>Sandbox</environment>
 
                         <target>Shared Space</target>
+                              <provider>MC</provider>
 
                         <replicas>1</replicas>
 

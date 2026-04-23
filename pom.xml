@@ -51,6 +51,7 @@
 
                         <target>Cloudhub-US-East-1</target>
                               <provider>MC</provider>
+                             <region>us-east-1</region>
 
                         <replicas>1</replicas>
 

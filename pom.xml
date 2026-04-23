@@ -46,8 +46,7 @@
                         <workerType>MICRO</workerType>
                     </cloudHubDeployment>
                 </configuration>
-
-            </plugin>
+ </plugin>
 
         </plugins>
     </build>
@@ -67,8 +66,7 @@
             <version>1.2.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-
-        <dependency>
+             <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-apikit-module</artifactId>
             <version>1.11.3</version>
@@ -83,8 +81,7 @@
         </dependency>
 
     </dependencies>
-
-    <repositories>
+ <repositories>
 
         <repository>
             <id>anypoint-exchange-v3</id>
@@ -95,25 +92,20 @@
         <repository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
-            <url>https://repository.mulesoft.org/releases/</url>
-        </repository>
+            <url>https://repository.mulesoft.org/releases/</url> </repository>
 
         <repository>
             <id>central</id>
             <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
+            <url>https://repo.maven.apache.org/maven2</url> </repository>
 
     </repositories>
-
-    <pluginRepositories>
+ <pluginRepositories>
 
         <pluginRepository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
-
-    </pluginRepositories>
-
+ </pluginRepositories>
 </project>

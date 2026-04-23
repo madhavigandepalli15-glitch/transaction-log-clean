@@ -49,7 +49,7 @@
 
                         <environment>Sandbox</environment>
 
-                        <target>Shared Space</target>
+                        <target>Cloudhub-US-East-1</target>
                               <provider>MC</provider>
 
                         <replicas>1</replicas>

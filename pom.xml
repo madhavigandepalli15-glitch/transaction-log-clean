@@ -34,17 +34,26 @@
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
 
-                <configuration>
-                    <cloudHubDeployment>
-                        <username>${env.ANYPOINT_USERNAME}</username>
-                        <password>${env.ANYPOINT_PASSWORD}</password>
-                        <applicationName>transaction-log-clean</applicationName>
-                        <environment>Sandbox</environment>
-                        <region>us-east-1</region>
-                        <workers>1</workers>
-                        <workerType>MICRO</workerType>
-                    </cloudHubDeployment>
-                </configuration>
+               <configuration>
+  <cloudHubDeployment>
+
+    <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
+
+    <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
+
+    <connectedAppGrantType>client_credentials</connectedAppGrantType>
+
+    <applicationName>transaction-log-clean-madhavi</applicationName>
+
+    <environment>Sandbox</environment>
+
+    <region>us-east-1</region>
+
+    <workers>1</workers>
+    <workerType>MICRO</workerType>
+
+  </cloudHubDeployment>
+</configuration>
  </plugin>
 
         </plugins>

@@ -28,34 +28,36 @@
                 <version>3.2.0</version>
             </plugin>
 
-            <plugin>
-                <groupId>org.mule.tools.maven</groupId>
-                <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
-                <extensions>true</extensions>
+           <plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>${mule.maven.plugin.version}</version>
+    <extensions>true</extensions>
 
-               <configuration>
-  <cloudHubDeployment>
+    <configuration>
 
-    <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
+        <cloudhub2Deployment>
 
-    <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
+            <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
 
-    <connectedAppGrantType>client_credentials</connectedAppGrantType>
+            <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
 
-    <applicationName>transaction-log-clean-madhavi</applicationName>
+            <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-    <environment>Sandbox</environment>
+            <applicationName>transaction-log-clean-madhavi</applicationName>
 
-    <region>us-east-1</region>
+            <environment>Sandbox</environment>
 
-    <workers>1</workers>
-    <workerType>MICRO</workerType>
+            <target>Cloudhub-US-East-1</target>
 
-  </cloudHubDeployment>
-</configuration>
- </plugin>
+            <replicas>1</replicas>
 
+            <vCores>0.1</vCores>
+
+        </cloudhub2Deployment>
+
+    </configuration>
+</plugin>
         </plugins>
     </build>
 

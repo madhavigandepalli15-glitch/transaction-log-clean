@@ -18,7 +18,7 @@ jobs:
           java-version: 8
 
       - name: Build and Deploy
-        run: mvn clean deploy -DmuleDeploy
+        run: mvn -DmuleDeploy deploy
         env:
           ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
           ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}

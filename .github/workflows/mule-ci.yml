@@ -1,32 +1,54 @@
-name: MuleSoft Auto Deploy
+name: Deploy to CloudHub 2.0
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set Java 8
+      # ✅ STEP: Generate settings.xml at runtime using GitHub Secrets
+      - name: Configure Maven Settings
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml << EOF
+          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+                    https://maven.apache.org/xsd/settings-1.0.0.xsd">
+            <servers>
+
+              <server>
+                <id>anypoint-exchange-v3</id>
+                <username>~~~Client~~~</username>
+                <password>${{ secrets.ANYPOINT_CLIENT_ID }}~?~${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
+              </server>
+
+              <server>
+                <id>mulesoft-releases-ee</id>
+                <username>~~~Client~~~</username>
+                <password>${{ secrets.ANYPOINT_CLIENT_ID }}~?~${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
+              </server>
+
+            </servers>
+          </settings>
+          EOF
+
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: '8'
+          java-version: '17'
+          distribution: 'temurin'
 
-      - name: Cache Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: maven-cache
-
+      # ✅ STEP: Pass secrets as env variables for pom.xml deployment config
       - name: Build and Deploy
         env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
-        run: mvn clean deploy -s .github/settings.xml -DmuleDeploy
+        run: mvn deploy --no-transfer-progress

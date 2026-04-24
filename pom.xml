@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Mule Runtime -->
-        <app.runtime>4.11.3</app.runtime>
+        <app.runtime>4.9.0</app.runtime>
 
         <!-- Mule Maven Plugin -->
         <mule.maven.plugin.version>4.6.0</mule.maven.plugin.version>
@@ -64,7 +64,7 @@
                         <provider>MC</provider>
 
                         <!-- Runtime -->
-                        <muleVersion>4.11.3</muleVersion>
+                        <muleVersion>4.9.0</muleVersion>
                         <releaseChannel>EDGE</releaseChannel>
 
                         <!-- Resources -->

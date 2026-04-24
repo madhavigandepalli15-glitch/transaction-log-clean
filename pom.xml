@@ -83,10 +83,11 @@
     <dependencies>
 
         <!-- HTTP Connector -->
+        <!-- FIX: was 10.13.0 (invalid) — correct versioning is 1.x.x for Mule 4 -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
-            <version>10.13.0</version>
+            <version>1.10.4</version>
             <classifier>mule-plugin</classifier>
         </dependency>
 
@@ -107,6 +108,7 @@
         </dependency>
 
         <!-- Salesforce Connector -->
+        <!-- NOTE: EE artifact — requires mulesoft-releases-ee repository below -->
         <dependency>
             <groupId>com.mulesoft.connectors</groupId>
             <artifactId>mule-salesforce-connector</artifactId>
@@ -118,19 +120,36 @@
 
     <repositories>
 
+        <!-- Anypoint Exchange — org-scoped artifacts -->
         <repository>
             <id>anypoint-exchange-v3</id>
+            <name>Anypoint Exchange V3</name>
             <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/7d7b8a25-9efd-45ef-971b-4a83e3b50c81/maven</url>
+            <layout>default</layout>
         </repository>
 
+        <!-- MuleSoft Public Releases — standard connectors -->
         <repository>
             <id>mulesoft-releases</id>
+            <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
+            <layout>default</layout>
         </repository>
 
+        <!-- FIX: MuleSoft EE Releases — required for Salesforce connector and other EE artifacts -->
+        <repository>
+            <id>mulesoft-releases-ee</id>
+            <name>MuleSoft EE Releases</name>
+            <url>https://repository.mulesoft.org/nexus/content/repositories/releases-ee/</url>
+            <layout>default</layout>
+        </repository>
+
+        <!-- Maven Central -->
         <repository>
             <id>central</id>
+            <name>Maven Central</name>
             <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
         </repository>
 
     </repositories>
@@ -139,6 +158,7 @@
 
         <pluginRepository>
             <id>mulesoft-releases</id>
+            <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
 

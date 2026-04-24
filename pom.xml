@@ -51,6 +51,9 @@
                         <environment>Sandbox</environment>
 
                         <!-- CloudHub 2.0 Target -->
+                             <mule.maven.plugin.version>4.6.0</mule.maven.plugin.version>
+<muleVersion>4.11.3</muleVersion>
+<releaseChannel>EDGE</releaseChannel>
                         <target>Cloudhub-US-East-2</target>
                         <provider>MC</provider>
 

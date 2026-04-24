@@ -13,42 +13,45 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ✅ STEP: Generate settings.xml at runtime using GitHub Secrets
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # ✅ Generate settings.xml at runtime — do NOT use the one committed in repo
       - name: Configure Maven Settings
         run: |
           mkdir -p ~/.m2
-          cat > ~/.m2/settings.xml << EOF
+          cat > ~/.m2/settings.xml << 'EOF'
           <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 
+                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                     https://maven.apache.org/xsd/settings-1.0.0.xsd">
             <servers>
 
+              <!-- Anypoint Exchange: uses Connected App credentials -->
               <server>
                 <id>anypoint-exchange-v3</id>
                 <username>~~~Client~~~</username>
                 <password>${{ secrets.ANYPOINT_CLIENT_ID }}~?~${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
               </server>
 
+              <!-- MuleSoft EE Repo: uses Anypoint Platform username + password -->
               <server>
                 <id>mulesoft-releases-ee</id>
-                <username>~~~Client~~~</username>
-                <password>${{ secrets.ANYPOINT_CLIENT_ID }}~?~${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
+                <username>${{ secrets.ANYPOINT_USERNAME }}</username>
+                <password>${{ secrets.ANYPOINT_PASSWORD }}</password>
               </server>
 
             </servers>
           </settings>
           EOF
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      # ✅ STEP: Pass secrets as env variables for pom.xml deployment config
+      # ✅ Build and deploy — pass secrets as env vars for pom.xml
       - name: Build and Deploy
         env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
         run: mvn deploy --no-transfer-progress
+        # ⚠️ Do NOT use -s .github/settings.xml — use ~/.m2/settings.xml (default)

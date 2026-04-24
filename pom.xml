@@ -51,7 +51,7 @@
                         <environment>Sandbox</environment>
 
                         <!-- CloudHub 2.0 Target -->
-                        <target>Cloudhub-US-East-1</target>
+                        <target>Cloudhub-US-East-2</target>
                         <provider>MC</provider>
 
                         <!-- Resources -->

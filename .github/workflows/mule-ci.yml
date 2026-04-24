@@ -1,25 +1,32 @@
-name: Mule CI CD
+name: MuleSoft Auto Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - name: Setup Java
+      - name: Set Java 8
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 8
-          cache: maven
+
+      - name: Cache Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
 
       - name: Build and Deploy
-        run: mvn clean deploy -DmuleDeploy
         env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
+        run: mvn clean deploy -DmuleDeploy

@@ -1,7 +1,6 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
-
   <servers>
 
     <server>
@@ -10,6 +9,12 @@
       <password>${env.ANYPOINT_CLIENT_ID}~?~${env.ANYPOINT_CLIENT_SECRET}</password>
     </server>
 
-  </servers>
+    <!-- FIX: Added to authenticate against EE repo for Salesforce connector -->
+    <server>
+      <id>mulesoft-releases-ee</id>
+      <username>~~~Client~~~</username>
+      <password>${env.ANYPOINT_CLIENT_ID}~?~${env.ANYPOINT_CLIENT_SECRET}</password>
+    </server>
 
+  </servers>
 </settings>

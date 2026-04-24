@@ -23,12 +23,14 @@
     <build>
         <plugins>
 
+            <!-- Clean Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.2.0</version>
             </plugin>
 
+            <!-- Mule Maven Plugin -->
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
@@ -39,22 +41,21 @@
 
                     <cloudhub2Deployment>
 
+                        <!-- Connected App Credentials -->
                         <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
-
                         <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
-
                         <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
+                        <!-- App Details -->
                         <applicationName>transaction-log-clean-madhavi</applicationName>
-
                         <environment>Sandbox</environment>
 
+                        <!-- CloudHub 2.0 Target -->
                         <target>Cloudhub-US-East-1</target>
-                              <provider>MC</provider>
-                             <region>us-east-1</region>
+                        <provider>MC</provider>
 
+                        <!-- Resources -->
                         <replicas>1</replicas>
-
                         <vCores>0.1</vCores>
 
                     </cloudhub2Deployment>
@@ -68,6 +69,7 @@
 
     <dependencies>
 
+        <!-- HTTP Connector -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
@@ -75,6 +77,7 @@
             <classifier>mule-plugin</classifier>
         </dependency>
 
+        <!-- Sockets Connector -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-sockets-connector</artifactId>
@@ -82,6 +85,7 @@
             <classifier>mule-plugin</classifier>
         </dependency>
 
+        <!-- APIKit -->
         <dependency>
             <groupId>org.mule.modules</groupId>
             <artifactId>mule-apikit-module</artifactId>
@@ -89,6 +93,7 @@
             <classifier>mule-plugin</classifier>
         </dependency>
 
+        <!-- Salesforce Connector -->
         <dependency>
             <groupId>com.mulesoft.connectors</groupId>
             <artifactId>mule-salesforce-connector</artifactId>

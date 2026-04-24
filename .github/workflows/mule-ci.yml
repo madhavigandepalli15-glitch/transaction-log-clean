@@ -17,16 +17,16 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 8
+          java-version: '8'
 
       - name: Cache Maven
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: maven-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          key: maven-cache
 
       - name: Build and Deploy
         env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
-       run: mvn clean deploy -s .github/settings.xml -DmuleDeploy
+        run: mvn clean deploy -s .github/settings.xml -DmuleDeploy

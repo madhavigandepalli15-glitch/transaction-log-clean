@@ -1,8 +1,9 @@
-name: Deploy to CloudHub 2.0
+name: Mule Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -10,48 +11,37 @@ jobs:
 
     steps:
 
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 8
 
-      # ✅ Generate settings.xml at runtime — do NOT use the one committed in repo
-      - name: Configure Maven Settings
+      - name: Create Maven settings.xml
         run: |
           mkdir -p ~/.m2
-          cat > ~/.m2/settings.xml << 'EOF'
-          <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                    https://maven.apache.org/xsd/settings-1.0.0.xsd">
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
             <servers>
-
-              <!-- Anypoint Exchange: uses Connected App credentials -->
-              <server>
-                <id>anypoint-exchange-v3</id>
-                <username>~~~Client~~~</username>
-                <password>${{ secrets.ANYPOINT_CLIENT_ID }}~?~${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
-              </server>
-
-              <!-- MuleSoft EE Repo: uses Anypoint Platform username + password -->
               <server>
                 <id>mulesoft-releases-ee</id>
-                <username>${{ secrets.ANYPOINT_USERNAME }}</username>
-                <password>${{ secrets.ANYPOINT_PASSWORD }}</password>
+                <username>${ANYPOINT_CLIENT_ID}</username>
+                <password>${ANYPOINT_CLIENT_SECRET}</password>
               </server>
-
+              <server>
+                <id>anypoint-exchange-v3</id>
+                <username>${ANYPOINT_CLIENT_ID}</username>
+                <password>${ANYPOINT_CLIENT_SECRET}</password>
+              </server>
             </servers>
           </settings>
           EOF
-
-      # ✅ Build and deploy — pass secrets as env vars for pom.xml
-      - name: Build and Deploy
         env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
-        run: mvn deploy --no-transfer-progress
-        # ⚠️ Do NOT use -s .github/settings.xml — use ~/.m2/settings.xml (default)
+
+      - name: Build and Deploy
+        run: mvn clean deploy --no-transfer-progress

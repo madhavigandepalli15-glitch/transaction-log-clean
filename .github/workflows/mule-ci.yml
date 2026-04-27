@@ -1,33 +1,43 @@
 name: Mule Deploy
-
 on:
   push:
     branches:
-      - main
-
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 8
+          java-version: 17
 
-      - name: Setup Maven Settings
+      - name: Configure Maven Settings
         run: |
           mkdir -p ~/.m2
-          cp .github/workflows/settings.xml ~/.m2/settings.xml
-
-      - name: Build and Deploy
-        run: mvn clean deploy --no-transfer-progress
+          cat > ~/.m2/settings.xml << EOF
+          <settings>
+            <servers>
+              <server>
+                <id>anypoint-exchange-v3</id>
+                <username>~~~Client~~~</username>
+                <password>$ANYPOINT_CLIENT_ID~?~$ANYPOINT_CLIENT_SECRET</password>
+              </server>
+              <server>
+                <id>mulesoft-releases</id>
+                <username>~~~Client~~~</username>
+                <password>$ANYPOINT_CLIENT_ID~?~$ANYPOINT_CLIENT_SECRET</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
         env:
-          ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
-          ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
+          ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
+          ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
+
+      - name: Deploy to CloudHub
+        run: mvn clean deploy mule:deploy --no-transfer-progress
+        env:
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}

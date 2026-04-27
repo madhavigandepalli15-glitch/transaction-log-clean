@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>754babc1-7282-4202-92f7-276457e43970</groupId>
     <artifactId>transaction_log</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>mule-application</packaging>
     <name>transaction_log</name>
     <properties>

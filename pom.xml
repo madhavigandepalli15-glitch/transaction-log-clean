@@ -1,64 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-<<<<<<< HEAD
-    <groupId>7d7b8a25-9efd-45ef-971b-4a83e3b50c81</groupId>
-    <artifactId>transaction_log</artifactId>
-    <version>1.0.0</version>
-=======
-    <!-- Maven Artifact Details -->
+    <!-- Project Details -->
     <groupId>com.mycompany</groupId>
     <artifactId>transaction_log</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
->>>>>>> branch 'main' of https://github.com/madhavigandepalli15-glitch/transaction-log-clean.git
+    <version>1.0.0</version>
     <packaging>mule-application</packaging>
 
     <name>transaction_log</name>
 
+    <!-- Properties -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-<<<<<<< HEAD
         <app.runtime>4.9.0</app.runtime>
-        <mule.maven.plugin.version>4.3.0</mule.maven.plugin.version>
-    </properties>
-=======
-        <!-- Mule Runtime -->
-        <app.runtime>4.9.0</app.runtime>
->>>>>>> branch 'main' of https://github.com/madhavigandepalli15-glitch/transaction-log-clean.git
-
-<<<<<<< HEAD
-    <build>
-        <plugins>
-=======
-        <!-- Mule Maven Plugin -->
         <mule.maven.plugin.version>4.6.0</mule.maven.plugin.version>
     </properties>
->>>>>>> branch 'main' of https://github.com/madhavigandepalli15-glitch/transaction-log-clean.git
 
-<<<<<<< HEAD
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.2.0</version>
-            </plugin>
-=======
+    <!-- Build -->
     <build>
         <plugins>
->>>>>>> branch 'main' of https://github.com/madhavigandepalli15-glitch/transaction-log-clean.git
 
-<<<<<<< HEAD
-            <plugin>
-                <groupId>org.mule.tools.maven</groupId>
-                <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
-                <extensions>true</extensions>
-=======
             <!-- Clean Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -85,7 +54,7 @@
                         <!-- Business Group -->
                         <businessGroupId>7d7b8a25-9efd-45ef-971b-4a83e3b50c81</businessGroupId>
 
-                        <!-- Application -->
+                        <!-- Application Name -->
                         <applicationName>transaction-log-clean-madhavi</applicationName>
 
                         <!-- Environment -->
@@ -96,7 +65,7 @@
                         <provider>MC</provider>
 
                         <!-- Runtime -->
-                        <muleVersion>4.9.0</muleVersion>
+                        <muleVersion>${app.runtime}</muleVersion>
                         <releaseChannel>EDGE</releaseChannel>
 
                         <!-- Resources -->
@@ -106,16 +75,15 @@
                     </cloudhub2Deployment>
 
                 </configuration>
-
             </plugin>
 
         </plugins>
     </build>
 
+    <!-- Dependencies -->
     <dependencies>
 
         <!-- HTTP Connector -->
-        <!-- FIX: was 10.13.0 (invalid) — correct versioning is 1.x.x for Mule 4 -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
@@ -140,7 +108,6 @@
         </dependency>
 
         <!-- Salesforce Connector -->
-        <!-- NOTE: EE artifact — requires mulesoft-releases-ee repository below -->
         <dependency>
             <groupId>com.mulesoft.connectors</groupId>
             <artifactId>mule-salesforce-connector</artifactId>
@@ -150,17 +117,18 @@
 
     </dependencies>
 
+    <!-- Repositories -->
     <repositories>
 
-        <!-- Anypoint Exchange — org-scoped artifacts -->
+        <!-- Anypoint Exchange -->
         <repository>
             <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange V3</name>
+            <name>Anypoint Exchange</name>
             <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/7d7b8a25-9efd-45ef-971b-4a83e3b50c81/maven</url>
             <layout>default</layout>
         </repository>
 
-        <!-- MuleSoft Public Releases — standard connectors -->
+        <!-- MuleSoft Public -->
         <repository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
@@ -168,7 +136,7 @@
             <layout>default</layout>
         </repository>
 
-        <!-- FIX: MuleSoft EE Releases — required for Salesforce connector and other EE artifacts -->
+        <!-- MuleSoft EE -->
         <repository>
             <id>mulesoft-releases-ee</id>
             <name>MuleSoft EE Releases</name>
@@ -186,102 +154,13 @@
 
     </repositories>
 
+    <!-- Plugin Repositories -->
     <pluginRepositories>
 
         <pluginRepository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
-        </pluginRepository>
-
-    </pluginRepositories>
->>>>>>> branch 'main' of https://github.com/madhavigandepalli15-glitch/transaction-log-clean.git
-
-                <configuration>
-                    <cloudHubDeployment>
-                        <uri>https://anypoint.mulesoft.com</uri>
-
-                        <muleVersion>${app.runtime}</muleVersion>
-
-                        <username>${anypoint.username}</username>
-                        <password>${anypoint.password}</password>
-
-                        <applicationName>transaction-log-api-madhavi</applicationName>
-                        <environment>Sandbox</environment>
-                        <region>us-east-1</region>
-
-                        <workers>1</workers>
-                        <workerType>MICRO</workerType>
-
-                        <objectStoreV2>true</objectStoreV2>
-                    </cloudHubDeployment>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>org.mule.connectors</groupId>
-            <artifactId>mule-http-connector</artifactId>
-            <version>1.10.3</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.connectors</groupId>
-            <artifactId>mule-sockets-connector</artifactId>
-            <version>1.2.5</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-apikit-module</artifactId>
-            <version>1.11.3</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>com.mulesoft.connectors</groupId>
-            <artifactId>mule-salesforce-connector</artifactId>
-            <version>11.3.3</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-
-    </dependencies>
-
-    <repositories>
-
-        <repository>
-            <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
-            <layout>default</layout>
-        </repository>
-
-        <repository>
-            <id>mulesoft-releases</id>
-            <name>MuleSoft Releases Repository</name>
-            <url>https://repository.mulesoft.org/releases/</url>
-            <layout>default</layout>
-        </repository>
-
-    </repositories>
-
-    <pluginRepositories>
-
-        <pluginRepository>
-            <id>mulesoft-releases</id>
-            <name>MuleSoft Releases Repository</name>
-            <layout>default</layout>
-            <url>https://repository.mulesoft.org/releases/</url>
-
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </pluginRepository>
 
     </pluginRepositories>

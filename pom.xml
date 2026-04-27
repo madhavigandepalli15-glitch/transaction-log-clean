@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>7d7b8a25-9efd-45ef-971b-4a83e3b50c81</groupId>
+    <groupId>754babc1-7282-4202-92f7-276457e43970</groupId>
     <artifactId>transaction_log</artifactId>
     <version>1.0.0</version>
     <packaging>mule-application</packaging>
@@ -27,7 +27,7 @@
                         <provider>MC</provider>
                         <environment>Sandbox</environment>
                         <target>Cloudhub-US-East-2</target>
-                        <businessGroupId>7d7b8a25-9efd-45ef-971b-4a83e3b50c81</businessGroupId>
+                        <businessGroupId>754babc1-7282-4202-92f7-276457e43970</businessGroupId>
                         <applicationName>transaction-log</applicationName>
                         <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
                         <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
@@ -91,7 +91,7 @@
         <repository>
             <id>anypoint-exchange-v3</id>
             <name>Anypoint Exchange</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/7d7b8a25-9efd-45ef-971b-4a83e3b50c81/maven</url>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/754babc1-7282-4202-92f7-276457e43970/maven</url>
         </repository>
     </distributionManagement>
 </project>

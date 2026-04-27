@@ -1,168 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <!-- Project Details -->
-    <groupId>com.mycompany</groupId>
-    <artifactId>transaction_log</artifactId>
+    <groupId>754babc1-7282-4202-92f7-276457e43970</groupId>
+    <artifactId>http-logger-poc</artifactId>
     <version>1.0.0</version>
     <packaging>mule-application</packaging>
-
-    <name>transaction_log</name>
-
-    <!-- Properties -->
+    <name>http-logger-poc</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <app.runtime>4.9.0</app.runtime>
-        <mule.maven.plugin.version>4.6.0</mule.maven.plugin.version>
+        <app.runtime>4.11.0</app.runtime>
+        <mule.maven.plugin.version>4.9.0</mule.maven.plugin.version>
     </properties>
-
-    <!-- Build -->
     <build>
         <plugins>
-
-            <!-- Clean Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.2.0</version>
-            </plugin>
-
-            <!-- Mule Maven Plugin -->
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
-
                 <configuration>
-
                     <cloudhub2Deployment>
-
-                        <!-- Connected App Credentials -->
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <provider>MC</provider>
+                        <environment>Sandbox</environment>
+                        <target>Cloudhub-US-East-2</target>
+                        <businessGroupId>754babc1-7282-4202-92f7-276457e43970</businessGroupId>
+                        <applicationName>http-logger-poc</applicationName>
                         <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
                         <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
                         <connectedAppGrantType>client_credentials</connectedAppGrantType>
-
-                        <!-- Business Group -->
-                        <businessGroupId>7d7b8a25-9efd-45ef-971b-4a83e3b50c81</businessGroupId>
-
-                        <!-- Application Name -->
-                        <applicationName>transaction-log-clean-madhavi</applicationName>
-
-                        <!-- Environment -->
-                        <environment>Sandbox</environment>
-
-                        <!-- Target -->
-                        <target>Cloudhub-US-East-2</target>
-                        <provider>MC</provider>
-
-                        <!-- Runtime -->
                         <muleVersion>${app.runtime}</muleVersion>
                         <releaseChannel>EDGE</releaseChannel>
-
-                        <!-- Resources -->
+                        <javaVersion>17</javaVersion>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
-
                     </cloudhub2Deployment>
-
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
-    <!-- Dependencies -->
     <dependencies>
-
-        <!-- HTTP Connector -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
-            <version>1.10.4</version>
+            <version>1.10.3</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-
-        <!-- Sockets Connector -->
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-sockets-connector</artifactId>
             <version>1.2.5</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-
-        <!-- APIKit -->
-        <dependency>
-            <groupId>org.mule.modules</groupId>
-            <artifactId>mule-apikit-module</artifactId>
-            <version>1.11.3</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-
-        <!-- Salesforce Connector -->
-        <dependency>
-            <groupId>com.mulesoft.connectors</groupId>
-            <artifactId>mule-salesforce-connector</artifactId>
-            <version>10.22.0</version>
-            <classifier>mule-plugin</classifier>
-        </dependency>
-
     </dependencies>
-
-    <!-- Repositories -->
     <repositories>
-
-        <!-- Anypoint Exchange -->
-        <repository>
-            <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/7d7b8a25-9efd-45ef-971b-4a83e3b50c81/maven</url>
-            <layout>default</layout>
-        </repository>
-
-        <!-- MuleSoft Public -->
         <repository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
-            <layout>default</layout>
         </repository>
-
-        <!-- MuleSoft EE -->
         <repository>
-            <id>mulesoft-releases-ee</id>
-            <name>MuleSoft EE Releases</name>
-            <url>https://repository.mulesoft.org/nexus/content/repositories/releases-ee/</url>
-            <layout>default</layout>
+            <id>anypoint-exchange-v3</id>
+            <name>Anypoint Exchange</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
         </repository>
-
-        <!-- Maven Central -->
-        <repository>
-            <id>central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <layout>default</layout>
-        </repository>
-
     </repositories>
-
-    <!-- Plugin Repositories -->
     <pluginRepositories>
-
         <pluginRepository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
-
     </pluginRepositories>
-
+    <distributionManagement>
+        <repository>
+            <id>anypoint-exchange-v3</id>
+            <name>Anypoint Exchange</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/754babc1-7282-4202-92f7-276457e43970/maven</url>
+        </repository>
+    </distributionManagement>
 </project>

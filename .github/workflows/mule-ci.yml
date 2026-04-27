@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -20,28 +19,15 @@ jobs:
           distribution: temurin
           java-version: 8
 
-      - name: Create Maven settings.xml
+      - name: Setup Maven Settings
         run: |
           mkdir -p ~/.m2
-          cat > ~/.m2/settings.xml <<EOF
-          <settings>
-            <servers>
-              <server>
-                <id>mulesoft-releases-ee</id>
-                <username>${ANYPOINT_CLIENT_ID}</username>
-                <password>${ANYPOINT_CLIENT_SECRET}</password>
-              </server>
-              <server>
-                <id>anypoint-exchange-v3</id>
-                <username>${ANYPOINT_CLIENT_ID}</username>
-                <password>${ANYPOINT_CLIENT_SECRET}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
+          cp .github/workflows/settings.xml ~/.m2/settings.xml
+
+      - name: Build and Deploy
+        run: mvn clean deploy --no-transfer-progress
         env:
+          ANYPOINT_USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
+          ANYPOINT_PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
           ANYPOINT_CLIENT_ID: ${{ secrets.ANYPOINT_CLIENT_ID }}
           ANYPOINT_CLIENT_SECRET: ${{ secrets.ANYPOINT_CLIENT_SECRET }}
-
-     - name: Check settings file
-  run: cat ~/.m2/settings.xml

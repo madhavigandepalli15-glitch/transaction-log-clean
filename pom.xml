@@ -37,6 +37,7 @@
                         <javaVersion>17</javaVersion>
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
+                             <deploymentTimeout>1800000</deploymentTimeout>
                     </cloudhub2Deployment>
                 </configuration>
             </plugin>

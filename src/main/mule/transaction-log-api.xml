@@ -5,7 +5,7 @@ http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mu
         <http:listener-connection host="0.0.0.0" port="9092" />
     </http:listener-config>
     <apikit:config name="transaction-log-api-config" api="transaction-log-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
-    <configuration-properties file="config.properties"/>
+    <configuration-properties file="config-template.properties"/>
     <salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="c9e27226-0b1c-4469-988d-6a69e4352d14" >
 		<salesforce:oauth-user-pass-connection consumerKey="${sf.consumerKey}" consumerSecret="${sf.consumerSecret}" username="${sf.username}" password="${sf.password}" securityToken="${sf.securityToken}" tokenEndpoint="${sf.tokenEndpoint}"/>
 	</salesforce:sfdc-config>
